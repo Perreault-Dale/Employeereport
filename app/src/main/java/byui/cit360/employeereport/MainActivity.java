@@ -10,9 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import byui.cit360.employeereport.control.Weather;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView weatherLabel;
+    Weather w;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         weatherLabel = (TextView) findViewById(R.id.textView);
+        w = new Weather();
+        w.execute();
+        weatherLabel.setText(w.getWeatherString());
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
