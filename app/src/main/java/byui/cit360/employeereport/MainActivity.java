@@ -21,15 +21,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        weatherLabel = (TextView) findViewById(R.id.textView);
-        w = new Weather();
-        w.execute();
-        weatherLabel.setText(w.getWeatherString());
+        Runnable task1 = () -> {
+            weatherLabel = findViewById(R.id.textView);
+            w = new Weather();
+            w.execute();
+            weatherLabel.setText(w.getWeatherString());
+        };
+        Thread t1 = new Thread(task1);
+        t1.start();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

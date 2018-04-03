@@ -9,15 +9,11 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
 
-/**
- * Created by Dale on 3/28/2018.
- */
-
 public class Weather {
 
-    String cityZip;
-    JSONObject weatherInfo;
-    String weatherString = "HQ Weather\n";
+    private String cityZip;
+    private JSONObject weatherInfo;
+    private String weatherString = "HQ Weather\n";
 
     public Weather() {
         this.cityZip = "Rexburg,us";
@@ -25,10 +21,11 @@ public class Weather {
 
     public Weather(String cityString) { this.cityZip = cityString; }
 
-    public void getWeatherInfo() {
+    private void getWeatherInfo() {
         String response = null;
+        String appId = "04ec42bc385dcb48b6d325cf720ffcb4";
         try {
-            URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + cityZip + "&appid=04ec42bc385dcb48b6d325cf720ffcb4");
+            URL url = new URL(String.format("https://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s", cityZip, appId));
             HttpsURLConnection connect;
             connect = (HttpsURLConnection) url.openConnection();
             BufferedReader br = new BufferedReader(new InputStreamReader(connect.getInputStream()));
@@ -45,30 +42,32 @@ public class Weather {
         }
     }
 
-    public void addTemperature() {
+    private void addTemperature() {
         try {
             JSONObject tempJson = (JSONObject) weatherInfo.get("main");
-            Integer temp = (Integer) tempJson.get("temp");
-            Integer imp_temp = (temp - 270) * 9 / 5 + 32;
+            Double temp = (Double) tempJson.get("temp");
+            Double imp_temp = (temp - 270) * 9 / 5 + 32;
             weatherString += "Temp: " + imp_temp + "\n";
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void addHumidity() {
+    private void addHumidity() {
         try {
-            Integer humid = (Integer) weatherInfo.get("main.humidity");
+            JSONObject tempJson = (JSONObject) weatherInfo.get("main");
+            Integer humid = (Integer) tempJson.get("humidity");
             weatherString += "Humidity: " + humid + "%\n";
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void addWind() {
+    private void addWind() {
         try {
-            Float windSpeed = (Float) weatherInfo.get("wind.speed");
-            Float windDeg = (Float) weatherInfo.get("wind.deg");
+            JSONObject tempJson = (JSONObject) weatherInfo.get("wind");
+            Double windSpeed = (Double) tempJson.get("speed");
+            Integer windDeg = (Integer) tempJson.get("deg");
             int windInt = (int) ((windDeg - 22.5) / 45.0);
             String direction = "";
             switch (windInt) {
