@@ -3,4 +3,5 @@
     <string name="action_settings">Settings</string>
     <string name="btn_team">Teams</string>
     <string name="btn_empl">Employees</string>
+    <string name="main_title">Employee Report</string>
 </resources>

@@ -26,7 +26,7 @@
         android:layout_width="189dp"
         android:layout_height="0dp"
         android:layout_marginBottom="69dp"
-        android:text="Employee Report"
+        android:text="@string/main_title"
         android:textAppearance="?android:textAppearanceLarge"
         app:layout_constraintBottom_toTopOf="@+id/buttonTeam"
         app:layout_constraintEnd_toEndOf="parent"
