@@ -1,5 +1,6 @@
 package byui.cit360.employeereport;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,11 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import byui.cit360.employeereport.control.Weather;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     TextView weatherLabel;
     Weather w;
@@ -33,14 +35,11 @@ public class MainActivity extends AppCompatActivity {
         Thread t1 = new Thread(task1);
         t1.start();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        View team_view = findViewById(R.id.buttonTeam);
+        team_view.setOnClickListener(this);
+
+        View empl_view = findViewById(R.id.buttonEmpl);
+        empl_view.setOnClickListener(this);
     }
 
     @Override
@@ -63,5 +62,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.buttonTeam) {
+            Intent intent = new Intent(this,TeamActivity.class);
+            this.startActivity(intent);
+        } else if (view.getId() == R.id.buttonEmpl) {
+            Intent intent = new Intent(this,EmployeeActivity.class);
+            this.startActivity(intent);
+        }
     }
 }

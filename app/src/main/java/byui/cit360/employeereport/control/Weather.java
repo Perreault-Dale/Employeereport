@@ -46,8 +46,8 @@ public class Weather {
         try {
             JSONObject tempJson = (JSONObject) weatherInfo.get("main");
             Double temp = (Double) tempJson.get("temp");
-            Double imp_temp = (temp - 270) * 9 / 5 + 32;
-            weatherString += "Temp: " + imp_temp + "\n";
+            long imp_temp = Math.round((temp - 270) * 9 / 5 + 32);
+            weatherString += "Temp: " + imp_temp + "F\n";
         } catch (JSONException e) {
             e.printStackTrace();
         }
