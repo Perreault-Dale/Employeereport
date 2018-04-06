@@ -14,6 +14,6 @@ public class EmployeeActivity extends AppCompatActivity {
 
         WebView myWebView = findViewById(R.id.webView2);
         myWebView.setWebViewClient(new WebViewClient());
-        myWebView.loadUrl("https://www.glassdoor.com");
+        myWebView.loadUrl("http://localhost:8084/FinalServlets/List?q=employee");
     }
 }

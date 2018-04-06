@@ -14,6 +14,6 @@ public class TeamActivity extends AppCompatActivity {
 
         WebView myWebView = findViewById(R.id.webView);
         myWebView.setWebViewClient(new WebViewClient());
-        myWebView.loadUrl("https://www.espn.com");
+        myWebView.loadUrl("http://localhost:8084/FinalServlets/List?q=team");
     }
 }
