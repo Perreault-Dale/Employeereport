@@ -45,7 +45,7 @@ public class Weather {
     private void addTemperature() {
         try {
             JSONObject tempJson = (JSONObject) weatherInfo.get("main");
-            Integer temp = (Integer) tempJson.get("temp");
+            Integer temp = Integer.parseInt(tempJson.get("temp").toString());
             long imp_temp = Math.round((temp - 270) * 9 / 5 + 32);
             weatherString += "Temp: " + imp_temp + "F\n";
         } catch (JSONException e) {
